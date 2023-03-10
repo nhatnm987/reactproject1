@@ -1,4 +1,5 @@
 import React from "react";
+import "./demo.scss";
 
 class ChildComponent extends React.Component {
     state = {
@@ -9,6 +10,11 @@ class ChildComponent extends React.Component {
         this.setState({
             showJobs: !this.state.showJobs,
         });
+    };
+
+    handleOnclickDelete = (job) => {
+        console.log(">>> handleOnclickDelete: ", job);
+        this.props.deleteJob(job);
     };
 
     render() {
@@ -32,7 +38,14 @@ class ChildComponent extends React.Component {
                             {arrJobs.map((item, index) => {
                                 return (
                                     <div key={item.id}>
-                                        {item.title} - {item.salary}
+                                        {item.title} - {item.salary} <> </>
+                                        <span
+                                            onClick={() =>
+                                                this.handleOnclickDelete(item)
+                                            }
+                                        >
+                                            <i className="bx bxs-message-x icon"></i>
+                                        </span>
                                     </div>
                                 );
                             })}
